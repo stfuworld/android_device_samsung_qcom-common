@@ -24,6 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 
+import org.lineageos.internal.util.ScreenType;
 
 public class TouchscreenGestureSettings extends PreferenceFragment {
 
@@ -51,8 +52,10 @@ public class TouchscreenGestureSettings extends PreferenceFragment {
     public void onResume() {
         super.onResume();
 
-        // We arealways running on a phone (J5), so remove padding around the listview
-        getListView().setPadding(0, 0, 0, 0);
+        // If running on a phone, remove padding around the listview
+        if (!ScreenType.isTablet(getContext())) {
+            getListView().setPadding(0, 0, 0, 0);
+        }
     }
 
     private Preference.OnPreferenceChangeListener mProximityListener =
